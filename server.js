@@ -18,6 +18,13 @@ const server = http.createServer((req, res) => {
       res.write(JSON.stringify(data));
       res.end();
       break;
+    case "/users":
+      const userPagePath = path.join(__dirname, "views/user.html");
+      const readuserPath = fs.readFileSync(userPagePath, "utf-8")
+      res.writeHead(200, { "content-type": "text/html" });
+      res.write(readuserPath)
+      res.end();
+      break;
 
     default:
       res.writeHead(404, { "content-type": "text/html" });

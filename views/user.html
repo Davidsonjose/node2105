@@ -8,13 +8,13 @@
   </head>
   <body>
     <div>
-      <h1>Welcome to my homepage 😀😀😀😀</h1>
+      <h1>Users</h1>
     </div>
     <div id="post"></div>
   </body>
 
   <script>
-    fetch("https://jsonplaceholder.typicode.com/posts/")
+    fetch("https://jsonplaceholder.typicode.com/users/")
       .then((response) => {
         return response.json();
       })
@@ -23,12 +23,17 @@
         for (let index = 0; index < data.length; index++) {
           const element = data[index];
           console.log(element);
-
           document.querySelector("#post").innerHTML += `
-            <p>user: ${element.userId}</p>
-            <h1>title: ${element.title}</h1>
-            <p>description: ${element.body}</p>
+            <h1>${element.id}</h1>
+            <p>${element.name}</p>
+            <p>${element.username}</p>
+            <p>${element.email}</p>
+            <p>Address: ${element.address.street}, ${element.address.city}</p>
+            <p>Phone: ${element.phone}</p>
+            <p>Website: ${element.website}</p>
+            <p>Company: ${element.name}</p>
             <hr>
+            <br>
           `;
         }
       })
