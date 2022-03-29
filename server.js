@@ -1,40 +1,37 @@
 const express = require("express");
 const fs = require("fs");
 const path = require("path");
+const homeRoutes = require("./routes/home.routes");
+const userRoutes = require("./routes/user.routes");
+const productRoutes = require("./routes/product.routes");
+const mongoose = require("mongoose");
 
 //initiallized our app using express
 const app = express();
-
-app.use(express.static(path.join(__dirname, "public")));
 
 //inititalized our body parser middleware
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 // app.use(express.json());
 
-app.get("/", (req, res) => {
-  const homePagePath = path.join(__dirname, "views/index.html");
-  const readHomePathContent = fs.readFileSync(homePagePath, "utf-8");
-  res.send(readHomePathContent);
-});
+// initialized routes middleware
+app.use("/", homeRoutes);
+app.use("/user", userRoutes);
+app.use("/product", productRoutes);
 
-app.get("/contact", (req, res) => {
-  const aboutPagePath = path.join(__dirname, "views/contact.html");
-  const readAboutPageContent = fs.readFileSync(aboutPagePath, "utf-8");
-  res.send(readAboutPageContent);
-});
+app.use(express.static(path.join(__dirname, "public")));
 
-app.get("/user", (req, res) => {
-  const userPagePath = path.join(__dirname, "views/user.html");
-  const readUserPageFile = fs.readFileSync(userPagePath, "utf-8");
-  res.send(readUserPageFile);
-});
-
-app.post("/contact", (req, res) => {
-  console.log(req.body);
-  res.send(req.body);
-  // res.send(req.body);
-});
+app.set("view engine", "ejs");
+mongoose
+  .connect("mongodb://localhost:27017/node2105-eccommerce", {
+    useNewUrlParser: true,
+  })
+  .then(() => {
+    console.log("Database is connected");
+  })
+  .catch((err) => {
+    console.log(err);
+  });
 
 const PORT = 10000;
 
