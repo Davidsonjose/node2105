@@ -37,7 +37,7 @@ router.get("/all-contact", async (req, res) => {
 router.delete("/contact/delete/:id", async (req, res, next) => {
   try {
     const deleteContact = await Contact.findByIdAndDelete(req.params.id);
-    res.render("all-contact");
+    res.redirect("/all-contact");
   } catch (error) {
     return next(new Error(error));
   }
@@ -51,10 +51,6 @@ router.post("/contact", async (req, res, next) => {
     });
     await contact.save();
     res.redirect("/all-contact");
-    // res.status(201).json({
-    //   status: "created",
-    //   message: contact,
-    // });
   } catch (error) {
     return next(new Error(error));
   }
