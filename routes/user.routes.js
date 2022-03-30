@@ -1,16 +1,8 @@
 const express = require("express");
-
+const { login, register } = require("../controllers/authController");
 const router = express.Router();
+router.get("/login", login);
 
-router.get("/all-users", (req, res) => {
-  res.status(200).json({
-    message: "Here is all the users in this application",
-  });
-});
-router.get("/single-user", (req, res) => {
-  res.status(200).json({
-    message: "Results of single user: Davidson",
-  });
-});
+router.post("/register", register);
 
 module.exports = router;
