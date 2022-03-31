@@ -25,10 +25,10 @@
             <td><%= info.email %></td>
             <td><%= info.message %></td>
             <td>
-                <form action= "http://localhost:10000/contact/delete/" method="POST">
+                <form action= "http://localhost:10000/contact/delete/<%= info.id %>?_method=DELETE" method="POST">
                     <button class="btn btn-danger" type="submit">Delete</button></td>
                 </form>
-            <td><button class="btn btn-warning"><a href="">Update</a></button></td>
+            <td><button class="btn btn-warning"><a href="/contact/update/<%= info.id %> ">Update</a></button></td>
           </tr>
           <% }) %>
         </tbody>

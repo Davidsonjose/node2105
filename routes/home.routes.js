@@ -56,4 +56,31 @@ router.post("/contact", async (req, res, next) => {
   }
 });
 
+router.get("/contact/update/:id", async (req, res, next) => {
+  try {
+    const contact = await Contact.findById(req.params.id);
+    res.render("updatecontact", {
+      data: contact,
+      title: "Update || Contact",
+    });
+  } catch (error) {
+    return next(new Error(error));
+  }
+});
+
+router.put("/contact/update/:id", async (req, res, next) => {
+  try {
+    const contact = await Contact.findByIdAndUpdate(
+      req.params.id,
+      {
+        $set: req.body,
+      },
+      { new: true }
+    );
+    res.redirect("/all-contact");
+  } catch (error) {
+    return next(new Error(error));
+  }
+});
+
 module.exports = router;
