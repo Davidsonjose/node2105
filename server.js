@@ -1,10 +1,21 @@
 const express = require("express");
 const userRoute = require("./routes/user.routes");
+const productRoute = require("./routes/product.routes");
+const categoryRoute = require("./routes/category.routes");
 const mongoose = require("mongoose");
-const app = express();
 require("dotenv").config();
 
+//intitialized my app middleware
+const app = express();
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+
+app.use("/upload", express.static("upload"));
+
+// initialized routes
 app.use("/api/user", userRoute);
+app.use("/api/product", productRoute);
+app.use("/api/category", categoryRoute);
 
 const MONGO_URL = process.env.MONGO_URL;
 mongoose

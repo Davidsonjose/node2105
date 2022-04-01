@@ -16,16 +16,17 @@ const UserSchema = new mongoose.Schema(
     },
     email: {
       type: String,
-      required: [true, "Please email is required "],
+      required: [true, "Please email is required"],
     },
     password: {
       type: String,
       required: [true, "Please password is required"],
     },
-    isRobot: {
-        type: Boolean,
-        required: [true, "please accept terms"]
-    }
+    isAdmin: {
+      type: Boolean,
+      default: false,
+      // required: [true, "please accept terms"]
+    },
   },
   { timestamps: true }
 );
