@@ -11,6 +11,7 @@ exports.register = async (req, res, next) => {
       res.status(401).json({
         message: "Please fill in all Fields",
       });
+      // return next(new ApiError("Please fill in all Fields"));
     }
     if (password.length < 6 || password.length > 12) {
       res.status(401).json({
@@ -70,5 +71,3 @@ exports.login = async (req, res, next) => {
     return next(new Error(error));
   }
 };
-
-
